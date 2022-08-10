@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .blinking-cursor:after {
+    content: '|';
+    @apply text-white;
+    animation: blink 1s step-start infinite; 
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+}
+
+body, a, input, textarea, button {
+  font-family: 'Inter', sans-serif;
+}
