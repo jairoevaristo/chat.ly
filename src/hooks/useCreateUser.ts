@@ -35,7 +35,7 @@ export function useCreateUser(): FetchDataReturn {
       )
 
     } catch {
-      toastError({ message: 'Deu ruim menor, arruma aí' })
+      toastError();
     }
     finally {
       setLoading(false);

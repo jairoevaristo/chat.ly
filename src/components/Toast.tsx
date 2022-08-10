@@ -7,9 +7,6 @@ import { useToastStore } from "../contexts/toastContext";
 import { RenderConditional } from "./RenderConditional";
 
 export function Toast() {
-  const timeOutCloseToast = useRef<NodeJS.Timeout | null>(null);
-  const timeOutActionCloseToast = useRef<NodeJS.Timeout | null>(null);
-
   const { 
     toastClose, 
     showToast, 
@@ -18,9 +15,14 @@ export function Toast() {
     actionCloseToast, 
     isFinishCloseToast 
   } = useToastStore(state => state);
+
+  const messageToastValue = messageToast || 'Ocorreu um erro inesperado, tente novamente!'
   
+  const timeOutCloseToast = useRef<NodeJS.Timeout | null>(null);
+  const timeOutActionCloseToast = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
-    if (!messageToast && isFinishCloseToast) {
+    if (!showToast && isFinishCloseToast) {
       return;
     }
 
@@ -29,7 +31,7 @@ export function Toast() {
     }, delayValue || 2500);
 
     return () => clearTimeout(timeOutCloseToast.current as NodeJS.Timeout);
-  }, [toastClose, messageToast, delayValue, actionCloseToast, isFinishCloseToast]);
+  }, [toastClose, showToast, delayValue, actionCloseToast, isFinishCloseToast]);
 
   useEffect(() => {
     if (!isFinishCloseToast && actionCloseToast) {
@@ -45,7 +47,7 @@ export function Toast() {
   return (
     <AnimatePresence>
       {
-        messageToast && (
+        showToast && (
         <div className="absolute h-screen w-full overflow-hidden">
           <div className="fixed sm:top-6 sm:p-0 sm:-translate-x-0 w-full sm:w-96 sm:left-auto sm:bottom-auto p-4 sm:right-8 z-50 bottom-2 left-1/2 transform -translate-x-1/2">
             <motion.div
@@ -66,8 +68,8 @@ export function Toast() {
                 component={<BadgeCheckIcon className="h-8 w-8 text-green-500" />}
               />
 
-              <span className="text-md max-w-[280px] pr-2 ml-2 flex-1 text-base text-gray-800 text-ellipsis overflow-hidden ...">
-                {messageToast}
+              <span className="text-md pr-6 ml-2 w-full text-gray-800 text-ellipsis overflow-hidden ...">
+                {messageToastValue}
               </span>
 
               <div

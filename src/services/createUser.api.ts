@@ -9,7 +9,12 @@ export const createUserAPI = async (
   
   const { data } = await api.post<IApiResponse<ICreateUserDTO>>(
     endpointCreateUser(),
-    createUserData
+    createUserData,
+    {
+      headers: {
+        Authorization: 'Basic cmVuYW5AbWFpbDoxMjM0NTY3OA=='
+      }
+    }
   );
 
   if (data?.success === false) throw new Error(data?.message);

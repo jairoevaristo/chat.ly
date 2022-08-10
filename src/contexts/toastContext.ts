@@ -1,15 +1,15 @@
 import create from 'zustand';
 
 type ToastParams = {
-  message: string;
+  message?: string;
   delayValue?: number;
 }
 
 type ToastStoreData = {
   showToast: '' | 'SUCCESS' | 'ERROR',
   messageToast: string;
-  toastSuccess: (data: ToastParams, fn?: () => void) => void;
-  toastError: (data: ToastParams, fn?: () => void) => void;
+  toastSuccess: (data?: ToastParams, fn?: () => void) => void;
+  toastError: (data?: ToastParams, fn?: () => void) => void;
   toastClose: () => void;
   actionCloseToast: (() => void) | null;
   delayValue: number;
@@ -22,20 +22,20 @@ export const useToastStore = create<ToastStoreData>((set) => ({
   delayValue: 2500,
   isFinishCloseToast: true,
   actionCloseToast: null,
-  toastSuccess: ({ message, delayValue }, fn) => {
+  toastSuccess: (data, fn) => {
     set(({ 
       showToast: 'SUCCESS', 
-      messageToast: message, 
-      delayValue, 
+      messageToast: data?.message, 
+      delayValue: data?.delayValue, 
       actionCloseToast: fn, 
       isFinishCloseToast: true 
     }))
   },
-  toastError: ({ message, delayValue }, fn) => {
+  toastError: (data, fn) => {
     set(({ 
       showToast: 'ERROR', 
-      messageToast: message, 
-      delayValue, 
+      messageToast: data?.message, 
+      delayValue: data?.delayValue, 
       actionCloseToast: fn, 
       isFinishCloseToast: true 
     }))

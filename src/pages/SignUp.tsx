@@ -102,7 +102,7 @@ const SignUp = () => {
                       onClick={() => inputFileRef.current?.click()}
                       />
                   </div>
-                  <input type="file" className="hidden" ref={inputFileRef} onChange={handleUploadFile} />
+                  <input type="file" name="avatar" className="hidden" ref={inputFileRef} onChange={handleUploadFile} />
 
                   <RenderConditional
                     condition={!errorImage && loadingUploadFile}
