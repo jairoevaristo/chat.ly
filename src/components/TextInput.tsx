@@ -11,9 +11,10 @@ export type TextInputProps = HtmlHTMLAttributes<HTMLInputElement> & {
   error?: string;
   onClickRightIcon?: () => void;
   onClickLeftIcon?: () => void;
+  className?: string;
 }
 
-export const TextInput: React.ForwardRefExoticComponent<TextInputProps> = forwardRef(({ name, value, error, type = 'text', leftIcon, rightIcon, onClickLeftIcon, onClickRightIcon, label, ...rest }, ref) => {
+export const TextInput: React.ForwardRefExoticComponent<TextInputProps> = forwardRef(({ name, value, error, type = 'text', leftIcon, rightIcon, onClickLeftIcon, onClickRightIcon, label, className, ...rest }, ref) => {
   const [isFocused, setIsFocused] = useState(false);
 
   function handleInputFocus() {
@@ -27,7 +28,7 @@ export const TextInput: React.ForwardRefExoticComponent<TextInputProps> = forwar
   return (
     <div className="flex flex-col justify-start w-full">
       {label && <label className="font-bold text-blue-800 text-lg mt-2">{label}</label>}
-      <div onBlur={handleInputBlur} className={`border w-full border-gray-200 py-3 px-2 rounded-md flex items-center mt-2 ${!error && isFocused && 'ring-2 ring-blue-200'} ${error && 'border-2 border-red-600'} transition duration-200 ease-in-out`}>
+      <div onBlur={handleInputBlur} className={`border w-full border-gray-200 py-3 px-2 rounded-md flex items-center mt-2 ${!error && isFocused && 'ring-2 ring-blue-200'} ${error && 'border-2 border-red-600'} transition duration-200 ease-in-out bg-white ${className}`}>
         <div className="mr-2" onClick={onClickLeftIcon}>
           {leftIcon}
         </div>

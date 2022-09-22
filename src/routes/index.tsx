@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import { Chat } from "../pages/Chat"
 import SignIn from "../pages/SignIn"
 import SignUp from "../pages/SignUp"
 import { PrivateRouter } from "./auth.routes"
@@ -11,7 +12,7 @@ const AppRoutes = () => {
         <Route path='/signup' element={<SignUp />} />
         <Route path="/app" element={
             <PrivateRouter>
-              <h1>Bem Vindo</h1>
+              <Chat />
             </PrivateRouter>
           } 
         />

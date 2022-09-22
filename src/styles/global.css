@@ -19,3 +19,20 @@
 body, a, input, textarea, button {
   font-family: 'Inter', sans-serif;
 }
+
+aside.emoji-picker-react {
+  width: 100%;
+  height: 220px;
+  overflow-y: hidden;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  padding-bottom: 12px;
+}
+
+@media screen and (max-width: 1280px) {
+  aside.emoji-picker-react {
+    width: 100%;
+    height: 140px;
+  }
+}

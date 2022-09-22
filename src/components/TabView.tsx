@@ -11,7 +11,7 @@ export const TabView: React.FC<TabViewProps> = ({ paths }) => {
   const { pathname } = useLocation();
 
   return (
-    <header className="flex items-center justify-around mb-4">
+    <div className="flex items-center justify-around mb-4">
       {paths?.map((item, key) => {
         return (
           <Link to={item.path} key={key}>
@@ -21,6 +21,6 @@ export const TabView: React.FC<TabViewProps> = ({ paths }) => {
           </Link>
         )
       })}
-    </header>
+    </div>
   )
 }
